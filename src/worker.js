@@ -34,6 +34,7 @@ process.on('message', ({fn, iterations, libraries}) => {
     })
 
     let sum = 0
+    let completed = 0
 
     for (let i = 0; i < iterations; i++) {
       const time = timer('ms')
@@ -41,13 +42,13 @@ process.on('message', ({fn, iterations, libraries}) => {
 
       const done = () => {
         if (cbCalled) {
-          return
+          throw new Error('done called twice')
         }
 
         cbCalled = true
         sum += time()
 
-        if (i === iterations - 1) {
+        if (++completed === iterations - 1) {
           success(parseInt(sum / iterations))
         }
       }
