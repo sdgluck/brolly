@@ -60,14 +60,18 @@ module.exports = function brolly (name, benches, deps) {
         console.log(`running ${iterations} iteration${iterations > 1 ? 's' : ''}...`)
 
         p.then((result) => {
-          console.log(`total ${time()}`)
-
+          console.log(`total ${time()}\n`)
           result.forEach((obj, i) => {
             if (obj.success) {
-              console.log(`${names[i]}: ${obj.result}ms (average)`)
+              const {avgExecTime, opsPerSec} = obj.result
+              console.log(`- ${names[i]}:`)
+              console.log(`    avg time: ${avgExecTime}ms`)
+              console.log(`     ops/sec: ${opsPerSec}`)
             } else {
-              console.log(`${names[i]}: failed (${obj.error})`)
+              console.log(`- ${names[i]}:`)
+              console.log(`    failed (${obj.error})`)
             }
+            console.log()
           })
         })
         return api

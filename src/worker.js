@@ -33,7 +33,8 @@ process.on('message', ({fn, iterations, libraries}) => {
       return val
     })
 
-    let sum = 0
+    const runTime = timer('s')
+    let execTime = 0
     let completed = 0
 
     for (let i = 0; i < iterations; i++) {
@@ -46,10 +47,13 @@ process.on('message', ({fn, iterations, libraries}) => {
         }
 
         cbCalled = true
-        sum += time()
+        execTime += time()
 
         if (++completed === iterations - 1) {
-          success(parseInt(sum / iterations))
+          success({
+            avgExecTime: parseInt(execTime / iterations),
+            opsPerSec: (iterations / runTime()).toLocaleString(undefined, {maximumFractionDigits: 0})
+          })
         }
       }
 
