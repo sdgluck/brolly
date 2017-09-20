@@ -23,7 +23,6 @@ process.on('message', ({fn, iterations, libraries}) => {
 
   try {
     const bench = new Function(`return ${fn}`)()
-    const time = timer('ms')
 
     const inject = libraries.map((val) => {
       if (typeof val === 'string') {
@@ -34,11 +33,10 @@ process.on('message', ({fn, iterations, libraries}) => {
       return val
     })
 
-    console.log(inject)
-
     let sum = 0
 
     for (let i = 0; i < iterations; i++) {
+      const time = timer('ms')
       let cbCalled = false
 
       const done = () => {

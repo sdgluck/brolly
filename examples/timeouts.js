@@ -8,7 +8,7 @@ const bench = benchmark('timeout', [
   [1000, function timeout (time, done) {
     setTimeout(done, time)
   }],
-  [wait, function timeout (wait, done) {
+  [wait, function interval (wait, done) {
     wait(done, 2000)
   }],
   ['delay', function delay (delay) {
@@ -16,4 +16,4 @@ const bench = benchmark('timeout', [
   }]
 ])
 
-bench(100).print()
+bench(10000).print()
