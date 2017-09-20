@@ -10,8 +10,8 @@ function success (result) {
 }
 
 function failure (error) {
-  process.send({success: false, error})
-  process.exit(1)
+  process.send({success: false, error: error.message})
+  process.exit(0)
 }
 
 process.on('message', ({fn, iterations, libraries}) => {

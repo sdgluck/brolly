@@ -30,7 +30,7 @@ var benchmark = require('brolly')
 
 ### `benchmark(name, benches) : Function`
 
-Execute a suite of benchmark functions.
+Create a benchmark suite.
 
 - __name__ {String} name of the benchmark suite
 - __benches__ {Array} array of benchmark functions
@@ -49,7 +49,7 @@ Returns self.
 
 Log the results to the console after completion.
 
-Return self.
+Returns self.
 
 ## Example
 
