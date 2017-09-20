@@ -1,9 +1,9 @@
 {
   "name": "brolly",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "benchmark in style",
   "main": "bin/index.js",
-  "jesnext:main": "src/index.js",
+  "jsnext:main": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir bin",
     "prepublishOnly": "npm run build"
