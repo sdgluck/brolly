@@ -5,10 +5,11 @@ const fork = require('furck')
 const assert = require('argsy')
 const timer = require('tiny-tim')
 
-module.exports = function brolly (name, benches) {
+module.exports = function brolly (name, benches, deps) {
   assert('brolly')
     .str(name, 'name')
     .optional.arr(name, 'benches')
+    .optional.arr(deps, 'deps')
 
   const names = []
 
@@ -26,7 +27,11 @@ module.exports = function brolly (name, benches) {
     const p = Promise.all(benches.map((bench, i) => {
       let libraries = []
 
-      if (Array.isArray(bench)) {
+      if (Array.isArray(bench) && Array.isArray(deps)) {
+        throw new Error('must use either shared or unique deps')
+      } else if (Array.isArray(deps) && deps.length) {
+        libraries = deps
+      } else if (Array.isArray(bench)) {
         libraries = bench
         bench = bench.pop()
       }

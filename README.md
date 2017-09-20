@@ -32,12 +32,15 @@ var benchmark = require('brolly')
 
 ## API
 
-### `benchmark(name, benches) : Function`
+### `benchmark(name, benches[, deps]) : Function`
 
 Create a benchmark suite.
 
+If using the `deps` argument the benches cannot have their own dependency definitions.
+
 - __name__ {String} name of the benchmark suite
 - __benches__ {Array} array of benchmark functions
+- __deps__ {Array} _(optional)_ shared bench deps
 
 Returns a bench function.
 
