@@ -3,11 +3,11 @@ const delay = require('delay')
 const benchmark = require('../src')
 
 const bench = benchmark('timeout', [
-  function timeout (done) {
-    setTimeout(done, 4000)
-  },
+  [4000, function timeout (time, done) {
+    setTimeout(done, time)
+  }],
   ['delay', function delay (delay) {
-    return delay(3000)
+    return delay(2000)
   }]
 ])
 

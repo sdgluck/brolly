@@ -22,9 +22,15 @@ process.on('message', ({fn, iterations, libraries}) => {
   called = true
 
   try {
-    const inject = libraries.map(require)
     const bench = new Function(`return ${fn}`)()
     const time = timer('ms')
+
+    const inject = libraries.map((val) => {
+      if (typeof val === 'string') {
+        return require(val)
+      }
+      return val
+    })
 
     let sum = 0
 

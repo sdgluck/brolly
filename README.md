@@ -4,6 +4,10 @@
 
 Run benchmarking functions in parallel.
 
+- forks each bench function as child process
+- pass node modules dependencies to bench functions
+- pass serialisable values to bench functions
+
 ## Install
 
 ```sh
@@ -57,10 +61,10 @@ Returns self.
 import benchmark from 'brolly'
 
 const bench = benchmark('timeout', [
-  // use done callback
-  function timeout (done) {
-    setTimeout(done, 1000)
-  },
+  // use done callback and pass serialisable value to bench fn
+  [1000, function timeout (time, done) {
+    setTimeout(done, time)
+  }],
   // request "delay" lib to be injected into bench fn
   // return Promise instead of calling done callback
   ['delay', function sleep (delay) {
