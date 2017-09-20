@@ -27,10 +27,14 @@ process.on('message', ({fn, iterations, libraries}) => {
 
     const inject = libraries.map((val) => {
       if (typeof val === 'string') {
-        return require(val)
+        try {
+          return require(val)
+        } catch (err) {}
       }
       return val
     })
+
+    console.log(inject)
 
     let sum = 0
 

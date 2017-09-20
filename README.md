@@ -5,8 +5,8 @@
 Run benchmarking functions in parallel.
 
 - forks each bench function as child process
-- pass node modules dependencies to bench functions
-- pass serialisable values to bench functions
+- pass module dependencies to bench functions
+- pass serialisable values
 
 ## Install
 

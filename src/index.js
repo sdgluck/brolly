@@ -35,8 +35,9 @@ module.exports = function brolly (name, benches) {
       names.push(bench.name || 'bench ' + (i + 1))
 
       const fn = bench.toString()
+      const worker = path.resolve(__dirname, './worker')
 
-      return fork(path.resolve(__dirname, './worker'), [], {silent:false})
+      return fork(worker)
         .send({iterations, libraries, fn})
         .catch((err) => {
           console.log(`error in "${bench.name}"`)
