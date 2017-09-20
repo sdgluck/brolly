@@ -1,0 +1,41 @@
+{
+  "name": "brolly",
+  "version": "1.0.0",
+  "description": "benchmark in style",
+  "main": "bin/index.js",
+  "jesnext:main": "src/index.js",
+  "scripts": {
+    "build": "babel src --out-dir bin",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdgluck/brolly.git"
+  },
+  "keywords": [
+    "tiny",
+    "parallel",
+    "bench",
+    "benchmark",
+    "benchmarks",
+    "util",
+    "spongebob"
+  ],
+  "author": "Sam Gluck <sdgluck@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sdgluck/brolly/issues"
+  },
+  "homepage": "https://github.com/sdgluck/brolly#readme",
+  "devDependencies": {
+    "jest": "^21.0.2"
+  },
+  "jest": {
+    "testRegex": "test.js"
+  },
+  "dependencies": {
+    "argsy": "^2.0.2",
+    "delay": "^2.0.0",
+    "furck": "^1.6.0"
+  }
+}
