@@ -28,27 +28,37 @@ var benchmark = require('brolly')
 
 ## API
 
-### `benchmark(benches) : Function`
+### `benchmark(name, benches) : Function`
 
 Execute a suite of benchmark functions.
 
 - __name__ {String} name of the benchmark suite
 - __benches__ {Array} array of benchmark functions
 
-Returns a `bench`.
+Returns a bench function.
+
+### `bench(iterations) : self`
+
+Run the benchmark suite.
+
+- __iterations__ {Number} number of times to run each bench function
+
+Returns self.
 
 ### `bench.print() : self`
 
 Log the results to the console after completion.
+
+Return self.
 
 ## Example
 
 ```js
 import benchmark from 'brolly'
 
-const bench = benchmark('wait', [
+const bench = benchmark('timeout', [
   // use done callback
-  function setTimeout (done) {
+  function timeout (done) {
     setTimeout(done, 1000)
   },
   // request "delay" lib to be injected into bench fn
