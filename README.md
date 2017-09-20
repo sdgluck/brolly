@@ -37,10 +37,6 @@ Execute a suite of benchmark functions.
 
 Returns a `bench`.
 
-### `bench.run() : self`
-
-Run the benchmark suite.
-
 ### `bench.print() : self`
 
 Log the results to the console after completion.
@@ -62,8 +58,8 @@ const bench = benchmark('wait', [
   }]
 ])
 
-// run and then print the results to console
-bench.run().print()
+// run each bench 1000 times and then print the results
+bench(1000).print()
 ```
 
 ## Contributing
