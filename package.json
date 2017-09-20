@@ -1,6 +1,6 @@
 {
   "name": "brolly",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "benchmark in style",
   "main": "bin/index.js",
   "jsnext:main": "src/index.js",
