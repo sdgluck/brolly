@@ -11,6 +11,12 @@ module.exports = function brolly (name, benches, deps) {
     .optional.arr(name, 'benches')
     .optional.arr(deps, 'deps')
 
+  if (deps) {
+    const realdeps = benches
+    benches = deps
+    deps = realdeps
+  }
+
   const names = []
 
   if (Array.isArray(name)) {
@@ -24,19 +30,18 @@ module.exports = function brolly (name, benches, deps) {
 
     const time = timer('ms', true)
 
-    const p = Promise.all(benches.map((bench, i) => {
+    const promise = Promise.all(benches.map((bench, i) => {
       let libraries = []
 
-      if (Array.isArray(bench) && Array.isArray(deps)) {
-        throw new Error('must use either shared or unique deps')
-      } else if (Array.isArray(deps) && deps.length) {
-        libraries = deps
-      } else if (Array.isArray(bench)) {
+      if (Array.isArray(bench)) {
         libraries = bench
         bench = bench.pop()
+      } else if (Array.isArray(deps) && deps.length) {
+        libraries = deps
       }
 
       assert.fn(bench, 'bench fn')
+
       names.push(bench.name || 'bench ' + (i + 1))
 
       const fn = bench.toString()
@@ -59,7 +64,7 @@ module.exports = function brolly (name, benches, deps) {
 
         console.log(`running ${iterations} iteration${iterations > 1 ? 's' : ''}...`)
 
-        p.then((result) => {
+        promise.then((result) => {
           console.log(`total ${time()}\n`)
           result.forEach((obj, i) => {
             if (obj.success) {
@@ -77,7 +82,7 @@ module.exports = function brolly (name, benches, deps) {
         return api
       },
       then (...args) {
-        return p.then(...args)
+        return promise.then(...args)
       }
     }
 

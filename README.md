@@ -1,10 +1,23 @@
-# brolly
+<p align="center">
+  <img src="https://github.com/sdgluck/brolly/blob/master/assets/umbrella.png" />
+</p>
 
-> benchmark in style
+<p><h1 align="center">brolly</h1></p>
 
-Run benchmarking functions in parallel.
+<p align="center">Benchmark in style</p>
 
-- forks each bench function as child process
+<p align="center">Made with ❤ at <a href="http://www.twitter.com/outlandish">@outlandish</a></p>
+  
+<p align="center">
+    <a href="http://badge.fury.io/js/brolly"><img alt="npm version" src="https://badge.fury.io/js/brolly.svg" /></a>
+</p>
+
+<hr/>
+
+Run benchmarking functions in parallel...
+
+- runs each bench in its own process using [furck](https://github.com/sdgluck/furck)
+- benchmark avg. execution [time](https://github.com/sdgluck/tiny-tim) & operations/sec
 - pass module dependencies to bench functions
 - pass serialisable values
 
@@ -32,15 +45,20 @@ var benchmark = require('brolly')
 
 ## API
 
-### `benchmark(name, benches[, deps]) : Function`
+### `benchmark(name, [deps, ]benches) : Function`
 
 Create a benchmark suite.
 
-If using the `deps` argument the benches cannot have their own dependency definitions.
-
 - __name__ {String} name of the benchmark suite
-- __benches__ {Array} array of benchmark functions
 - __deps__ {Array} _(optional)_ shared bench deps
+- __benches__ {Array} array of benchmark functions
+
+An element of `benches` should be a function or an array:
+
+- if a function, this will be the bench function
+- if an array, the last element should be the bench function and all
+previous elements should be unique dependencies of that bench, which will
+override any deps given as `deps` to the suite
 
 Returns a bench function.
 
